@@ -1,14 +1,15 @@
-// index.js
+require('dotenv').config();  // Add this line at the top of the file
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
 
 // MongoDB Connection
-mongoose.connect('mongodb+srv://vivekpavankalyan:RSzxYRnwdySL0TU3@cluster0.w3bq9.mongodb.net/todolist', { useNewUrlParser: true, useUnifiedTopology: true })
+const mongoURI = process.env.MONGO_URI;
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.log('MongoDB connection error:', err));
 
